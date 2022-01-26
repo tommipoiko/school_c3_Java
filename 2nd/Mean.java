@@ -1,7 +1,3 @@
-/**
- *
- * @author tommipoiko
- */
 
 public class Mean {
 

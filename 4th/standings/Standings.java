@@ -1,14 +1,22 @@
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Standings {
 
     // Private
+    private final ArrayList<Team> list_of_teams = new ArrayList<>();
+    private void reorderStandings() {
+        
+        //
+    }
     
     // Public
     public class Team {
         
         // Private
-        private String team_name;
+        private final String team_name;
         private int team_wins;
         private int team_ties;
         private int team_losses;
@@ -19,6 +27,13 @@ public class Standings {
         // Public
         public Team(String name) {
             this.team_name = name;
+        }
+        
+        public String getName() {
+            
+            // Returns the name of the team;
+            
+            return this.team_name;
         }
         
         public int getWins() {
@@ -69,14 +84,48 @@ public class Standings {
         //
     }
     
-    public Standings(String filename) {
+    public Standings(String filename) throws IOException {
         
         //
+        
+        try(var file = new BufferedReader(new FileReader(filename))) {
+            String row = null;
+            while((row = file.readLine()) != null) {
+                String[] file_row = row.split("\\t");
+                String nameA = file_row[0];
+                String nameB = file_row[2];
+                String game_score = file_row[1];
+                int scoreA = Integer.parseInt(game_score.split("-")[0]);
+                int scoreB = Integer.parseInt(game_score.split("-")[1]);
+                
+                addMatchResult(nameA, scoreA, scoreB, nameB);
+            }
+        }
+        catch(IOException e) {
+            System.out.println("Duba");
+        }
     }
     
     public void readMatchData(String filename) {
         
         //
+        
+        try(var file = new BufferedReader(new FileReader(filename))) {
+            String row = null;
+            while((row = file.readLine()) != null) {
+                String[] file_row = row.split("\\t");
+                String nameA = file_row[0];
+                String nameB = file_row[2];
+                String game_score = file_row[1];
+                int scoreA = Integer.parseInt(game_score.split("-")[0]);
+                int scoreB = Integer.parseInt(game_score.split("-")[1]);
+                
+                addMatchResult(nameA, scoreA, scoreB, nameB);
+            }
+        }
+        catch(IOException e) {
+            System.out.println("Duba");
+        }
     }
     
     public void addMatchResult(String teamNameA, int goalsA,
@@ -89,9 +138,7 @@ public class Standings {
         
         //
         
-        ArrayList<Team> teams = new ArrayList<>();
-        
-        return teams;
+        return this.list_of_teams;
     }
     
     public void printStandings() {

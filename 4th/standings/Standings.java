@@ -29,8 +29,12 @@ public class Standings {
                     if (goalDifferenceA < goalDifferenceB) {
                         bestTeam = team;
                     } else if (goalDifferenceA == goalDifferenceB) {
-                        if (bestTeam.getName().compareTo(team.getName()) > 0) {
+                        if (bestTeam.getScored() < team.getScored()) {
                             bestTeam = team;
+                        } else if (bestTeam.getScored() == team.getScored()) {
+                            if (bestTeam.getName().compareTo(team.getName()) > 0) {
+                                bestTeam = team;
+                            }
                         }
                     }
                 }
@@ -252,6 +256,8 @@ public class Standings {
                 teamB.team_points += 1;
             }
         }
+        
+        this.reorderStandings();
     }
     
     public ArrayList<Team> getTeams() {
@@ -287,10 +293,10 @@ public class Standings {
             String goalsAB = "";
             goalsAB += team.getScored() + "-" + team.getAllowed();
             
-            System.out.format("%3d ", team.getWins() + team.getLosses() + team.getTies());
+            System.out.format(" %3d ", team.getWins() + team.getLosses() + team.getTies());
             System.out.format("%3d ", team.getWins());
-            System.out.format("%3d ", team.getLosses());
             System.out.format("%3d ", team.getTies());
+            System.out.format("%3d ", team.getLosses());
             System.out.format("%6s ", goalsAB);
             System.out.format("%3d\n", team.getPoints());
         }

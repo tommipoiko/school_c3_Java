@@ -2,7 +2,30 @@
 
 public class Student {
 
-    public static void main(String args[]){
-        // TODO code application logic here
+    // Private
+    private final String name;
+    private final String studentNumber;
+    
+    // Public
+    public Student(String name, String studentNumber) {
+        
+        //
+        
+        this.name = name;
+        this.studentNumber = studentNumber;
+    }
+    
+    public String getName() {
+        
+        //
+        
+        return this.name;
+    }
+    
+    public String getStudentNumber() {
+        
+        //
+        
+        return this.studentNumber;
     }
 }

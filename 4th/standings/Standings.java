@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Standings {
 
     // Private
-    private final ArrayList<Team> list_of_teams = new ArrayList<>();
+    private final ArrayList<Team> list_of_teams = new ArrayList();
     
     private void reorderStandings() {
         

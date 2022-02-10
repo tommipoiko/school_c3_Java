@@ -18,13 +18,13 @@ public class DateTime extends Date {
                     minute_ = minute;
                     second_ = second;
                 } else {
-                    throw new DateException(String.format("Illegal time %d.%d.%d", hour, minute, second));
+                    throw new DateException(String.format("Illegal time %d:%d:%d", hour, minute, second));
                 }
             } else {
-                throw new DateException(String.format("Illegal time %d.%d.%d", hour, minute, second));
+                throw new DateException(String.format("Illegal time %d:%d:%d", hour, minute, second));
             }
         } else {
-            throw new DateException(String.format("Illegal time %d.%d.%d", hour, minute, second));
+            throw new DateException(String.format("Illegal time %d:%d:%d", hour, minute, second));
         }
     }
     

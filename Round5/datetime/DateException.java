@@ -1,8 +1,8 @@
 // import here
 
-public class DateException {
+public class DateException extends Exception {
 
-    public static void main(String args[]){
-        // TODO code application logic here
+    public DateException(String msg){
+        super(msg);
     }
 }

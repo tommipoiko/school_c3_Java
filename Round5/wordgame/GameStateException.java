@@ -1,8 +1,8 @@
 // import here
 
-public class GameStateException {
+public class GameStateException extends Exception {
 
-    public static void main(String args[]){
-        // TODO code application logic here
+    public GameStateException(String msg){
+        super(msg);
     }
 }

@@ -54,7 +54,11 @@ public class Dates {
         public String toString() {
             
             String startDW = startDate.getDayOfWeek().toString();
+            startDW = startDW.toLowerCase();
+            startDW = startDW.substring(0, 1).toUpperCase() + startDW.substring(1);
             String endDW = endDate.getDayOfWeek().toString();
+            endDW = endDW.toLowerCase();
+            endDW = endDW.substring(0, 1).toUpperCase() + endDW.substring(1);
             
             String startWeek = startDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
             String endWeek = endDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));

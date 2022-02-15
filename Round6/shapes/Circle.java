@@ -22,7 +22,7 @@ public class Circle implements IShapeMetrics {
     public String name() { return "circle"; }
     
     @Override
-    public double area() { return PI * PI * this.radius; }
+    public double area() { return PI * this.radius * this.radius; }
     
     @Override
     public double circumference() { return 2 * PI * this.radius; }

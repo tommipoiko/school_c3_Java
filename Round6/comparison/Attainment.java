@@ -73,7 +73,7 @@ public class Attainment implements Comparable<Attainment> {
         
         int cmp = a.courseCode.compareTo(b.courseCode);
         if (cmp == 0) {
-            cmp = Integer.compare(a.grade, b.grade);
+            cmp = Integer.compare(a.grade, b.grade) * -1;
         }
         return cmp;
     };

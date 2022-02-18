@@ -24,5 +24,4 @@ public class ComparisonTest {
     attainments.sort(Attainment.CODE_STUDENT_CMP);
     System.out.format("Sorted using CODE_STUDENT_CMP:%n%s%n", attainments);
   }
-
 }

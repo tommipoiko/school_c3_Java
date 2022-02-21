@@ -1,3 +1,6 @@
+import java.util.Collections;
+import java.util.Iterator;
+
 public abstract class Node {
   public boolean isValue() {
     return this instanceof ValueNode;
@@ -19,89 +22,78 @@ public abstract class Node {
 
   public void printJson() {
     StringBuilder sb = new StringBuilder();
-    printJson(this, sb, 1, false, false);
+    printJson(this, sb, 1, null);
     System.out.print(sb.toString());
   }
   
-  private void printJson(Node node, StringBuilder sb, int level, boolean noPar, boolean noBra) {
-    if(node.isObject()) {
-      if (!noPar) {
-        for (int i = 1; i <= 2*(level-1); i++) {
-          sb.append(" ");
-        }
-        sb.append("{\n");
-      }
+  private void printJson(Node node, StringBuilder sb, int indentation, Iterator parentIter) {
+    char quotes = '"';
+    if (node.isObject()) {
       ObjectNode objNode = (ObjectNode) node;
-      for(String name : objNode) {
-        for (int i = 1; i <= 2*level; i++) {
-          sb.append(" ");
-        }
-        sb.append("\"").append(name).append("\"").append(": ");
-        if (objNode.get(name).isObject()) {
-          sb.append("{\n");
-          printJson(objNode.get(name), sb, level+1, true, false);
-        } else if (objNode.get(name).isArray()) {
-          sb.append("[\n");
-          printJson(objNode.get(name), sb, level+1, false, true);
-        } else {
-          printJson(objNode.get(name), sb, level+1, false, false);
-        }
-        if (objNode.get(name).isObject()) {
-          for (int i = 1; i <= 2*level; i++) {
-            sb.append(" ");
-          }
-          sb.append("},\n");
-        } else if (objNode.get(name).isArray()) {
-          for (int i = 1; i <= 2*level; i++) {
-            sb.append(" ");
-          }
-          sb.append("],\n");
-        }
+      sb.append("{");
+      Iterator<String> iter = objNode.iterator();
+      boolean hasItems = false;
+      if (iter.hasNext()) {
+        sb.append(NL);
+        hasItems = true;
       }
-      if (!noPar) {
-        for (int i = 1; i <= 2*(level-1); i++) {
-          sb.append(" ");
-        }
-        sb.append("}\n");
+      while (iter.hasNext()) {
+        String name = iter.next();
+        sb.append(repeatIndentation(indentation));
+        sb.append(quotes + name + quotes).append(": ");
+        printJson(objNode.get(name), sb, indentation + 1, iter);
       }
-    }
-    else if(node.isArray()) {
-      if (!noBra) {
-        for (int i = 1; i <= 2*(level-1); i++) {
-          sb.append(" ");
-        }
-        sb.append("[\n");
+      if (hasItems) {
+        sb.append(repeatIndentation(indentation - 1));
       }
+      if (parentIter != null && parentIter.hasNext()) {
+        sb.append("},").append(NL);
+      } else {
+        sb.append("}").append(NL);
+      }
+    } else if (node.isArray()) {
+      sb.append("[");
       ArrayNode arrNode = (ArrayNode) node;
-      for(Node aNode : arrNode) {
-        printJson(aNode, sb, level+1, noPar, noBra);
+      Iterator<Node> iter = arrNode.iterator();
+      boolean hasItems = false;
+      if (iter.hasNext()) {
+        sb.append(NL);
+        hasItems = true;
       }
-      if (!noBra) {
-        for (int i = 1; i <= 2*(level-1); i++) {
-          sb.append(" ");
-        }
-        sb.append("]\n");
+      while (iter.hasNext()) {
+        Node aNode = iter.next();
+        sb.append(repeatIndentation(indentation));
+        printJson(aNode, sb, indentation + 1, iter);
       }
-    }
-    else if(node.isValue()) {
+      if (hasItems) {
+        sb.append(repeatIndentation(indentation - 1));
+      }
+      if (parentIter != null && parentIter.hasNext()) {
+        sb.append("],").append(NL);
+      } else {
+        sb.append("]").append(NL);
+      }
+    } else if (node.isValue()) {
       ValueNode valNode = (ValueNode) node;
       String valStr = "null";
-      if(valNode.isNumber()) {
+      if (valNode.isNumber()) {
         valStr = numberToString(valNode.getNumber());
-      }
-      else if(valNode.isBoolean()) {
+      } else if (valNode.isBoolean()) {
         valStr = Boolean.toString(valNode.getBoolean());
-      }
-      else if(valNode.isString()) {
+      } else if (valNode.isString()) {
         valStr = "\"" + valNode.getString() + "\"";
       }
-      if (sb.charAt(sb.length()-1) != ' ') {
-        for (int i = 1; i <= 2*(level-1); i++) {
-          sb.append(" ");
-        }
+      sb.append(String.format("%s", valStr));
+      if (parentIter != null && parentIter.hasNext()) {
+        sb.append(",");
       }
-      sb.append(String.format("%s%n", valStr));
+      sb.append(NL);
     }
+
+  }
+
+  private String repeatIndentation(int n) {
+    return String.join("", Collections.nCopies(n, "  "));
   }
 
   private static final String NL = System.lineSeparator();

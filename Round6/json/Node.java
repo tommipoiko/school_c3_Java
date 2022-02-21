@@ -19,51 +19,68 @@ public abstract class Node {
 
   public void printJson() {
     StringBuilder sb = new StringBuilder();
-    sb.append("{").append(NL);
-    printJson(this, sb, 0);
-    sb.append("}").append(NL);
+    printJson(this, sb, 1, false, false);
     System.out.print(sb.toString());
   }
   
-  private void printJson(Node node, StringBuilder sb, int level) {
+  private void printJson(Node node, StringBuilder sb, int level, boolean noPar, boolean noBra) {
     if(node.isObject()) {
+      if (!noPar) {
+        for (int i = 1; i <= 2*(level-1); i++) {
+          sb.append(" ");
+        }
+        sb.append("{\n");
+      }
       ObjectNode objNode = (ObjectNode) node;
       for(String name : objNode) {
-        for (int i = 0; i <= 2*level; i++) {
+        for (int i = 1; i <= 2*level; i++) {
           sb.append(" ");
         }
         sb.append("\"").append(name).append("\"").append(": ");
         if (objNode.get(name).isObject()) {
           sb.append("{\n");
+          printJson(objNode.get(name), sb, level+1, true, false);
         } else if (objNode.get(name).isArray()) {
           sb.append("[\n");
+          printJson(objNode.get(name), sb, level+1, false, true);
+        } else {
+          printJson(objNode.get(name), sb, level+1, false, false);
         }
-        printJson(objNode.get(name), sb, level+1);
         if (objNode.get(name).isObject()) {
-          for (int i = 0; i <= 2*level; i++) {
+          for (int i = 1; i <= 2*level; i++) {
             sb.append(" ");
           }
           sb.append("},\n");
         } else if (objNode.get(name).isArray()) {
-          for (int i = 0; i <= 2*level; i++) {
+          for (int i = 1; i <= 2*level; i++) {
             sb.append(" ");
           }
           sb.append("],\n");
         }
       }
+      if (!noPar) {
+        for (int i = 1; i <= 2*(level-1); i++) {
+          sb.append(" ");
+        }
+        sb.append("}\n");
+      }
     }
     else if(node.isArray()) {
+      if (!noBra) {
+        for (int i = 1; i <= 2*(level-1); i++) {
+          sb.append(" ");
+        }
+        sb.append("[\n");
+      }
       ArrayNode arrNode = (ArrayNode) node;
       for(Node aNode : arrNode) {
-        for (int i = 0; i <= 2*level; i++) {
+        printJson(aNode, sb, level+1, noPar, noBra);
+      }
+      if (!noBra) {
+        for (int i = 1; i <= 2*(level-1); i++) {
           sb.append(" ");
         }
-        sb.append("{\n");
-        printJson(aNode, sb, level+1);
-        for (int i = 0; i <= 2*level; i++) {
-          sb.append(" ");
-        }
-        sb.append("},\n");
+        sb.append("]\n");
       }
     }
     else if(node.isValue()) {
@@ -77,6 +94,11 @@ public abstract class Node {
       }
       else if(valNode.isString()) {
         valStr = "\"" + valNode.getString() + "\"";
+      }
+      if (sb.charAt(sb.length()-1) != ' ') {
+        for (int i = 1; i <= 2*(level-1); i++) {
+          sb.append(" ");
+        }
       }
       sb.append(String.format("%s%n", valStr));
     }

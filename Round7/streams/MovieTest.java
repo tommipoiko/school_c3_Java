@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
+
 public class MovieTest {
   public static void main(String[] args)
           throws IOException {
@@ -29,5 +30,4 @@ public class MovieTest {
     movies = ma.moviesByDirector("Martin Scorsese");
     movies.forEach(showInfo);
   }
-
 }

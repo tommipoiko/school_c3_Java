@@ -17,5 +17,4 @@ public class MovieTest2 {
     System.out.println("Average score by genre:");
     ma.printAverageScoreByGenre();
   }
-
 }

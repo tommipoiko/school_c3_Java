@@ -3,6 +3,7 @@ import java.util.stream.Stream;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.stream.Collector;
 
 public class MovieAnalytics2 {
 
@@ -36,7 +37,7 @@ public class MovieAnalytics2 {
 
     public void printCountByDirector(int n) {
 
-        //
+        int counter = 0;
     }
 
     public void printAverageDurationByGenre() {

@@ -8,6 +8,10 @@ import java.nio.charset.StandardCharsets;
 import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
 import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 import org.apache.commons.lang3.StringUtils;
+import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
+import static org.apache.commons.lang3.StringUtils.equalsIgnoreCase;
+import static org.apache.commons.lang3.StringUtils.indexOfIgnoreCase;
+import static org.apache.commons.lang3.StringUtils.lastIndexOfIgnoreCase;
 
 public class main {
 
@@ -36,12 +40,19 @@ public class main {
                 String[] rows = text.split("\n");
                 int num = 1;
                 for (var row : rows) {
-                    if (org.apache.commons.lang3.StringUtils.containsIgnoreCase(row, word)) {
+                    if (containsIgnoreCase(row, word)) {
                         String[] words = row.split("\\s+");
                         String print = "";
                         for (String a : words) {
-                            if (org.apache.commons.lang3.StringUtils.containsIgnoreCase(a, word)) {
-                                print += word.toUpperCase() + " ";
+                            if (containsIgnoreCase(a, word)) {
+                                if (equalsIgnoreCase(a, word)) {
+                                    print += word.toUpperCase() + " ";
+                                } else {
+                                    int s = indexOfIgnoreCase(a, word);
+                                    int e = lastIndexOfIgnoreCase(a, word) + word.length();
+                                    a = StringUtils.overlay(a, word.toUpperCase(), s, e);
+                                    print += a + " ";
+                                }
                             } else {
                                 print += a + " ";
                             }

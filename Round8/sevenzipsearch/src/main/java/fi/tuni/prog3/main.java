@@ -41,9 +41,13 @@ public class main {
                 int num = 1;
                 for (var row : rows) {
                     if (containsIgnoreCase(row, word)) {
+                        int l = word.length();
                         int s = indexOfIgnoreCase(row, word);
-                        int e = lastIndexOfIgnoreCase(row, word) + word.length();
-                        row = StringUtils.overlay(row, word.toUpperCase(), s, e);
+                        int e = lastIndexOfIgnoreCase(row, word) + l;
+                        
+                        row = StringUtils.overlay(row, word.toUpperCase(), s, s+l);
+                        row = StringUtils.overlay(row, word.toUpperCase(), e-l, e);
+                        
                         System.out.println(num + ": " + row);
                     }
                     num++;

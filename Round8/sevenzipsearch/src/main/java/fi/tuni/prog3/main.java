@@ -7,6 +7,7 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
 import org.apache.commons.compress.archivers.sevenz.SevenZFile;
+import org.apache.commons.lang3.StringUtils;
 
 public class main {
 
@@ -36,7 +37,17 @@ public class main {
                 int num = 1;
                 for (var row : rows) {
                     if (org.apache.commons.lang3.StringUtils.containsIgnoreCase(row, word)) {
-                        System.out.println(num + ": " + row);
+                        String[] words = row.split("\\s+");
+                        String print = "";
+                        for (String a : words) {
+                            if (org.apache.commons.lang3.StringUtils.containsIgnoreCase(a, word)) {
+                                print += word.toUpperCase() + " ";
+                            } else {
+                                print += a + " ";
+                            }
+                        }
+                        print = StringUtils.stripToEmpty(print);
+                        System.out.println(num + ": " + print);
                     }
                     num++;
                 }

@@ -41,24 +41,10 @@ public class main {
                 int num = 1;
                 for (var row : rows) {
                     if (containsIgnoreCase(row, word)) {
-                        String[] words = row.split("\\s+");
-                        String print = "";
-                        for (String a : words) {
-                            if (containsIgnoreCase(a, word)) {
-                                if (equalsIgnoreCase(a, word)) {
-                                    print += word.toUpperCase() + " ";
-                                } else {
-                                    int s = indexOfIgnoreCase(a, word);
-                                    int e = lastIndexOfIgnoreCase(a, word) + word.length();
-                                    a = StringUtils.overlay(a, word.toUpperCase(), s, e);
-                                    print += a + " ";
-                                }
-                            } else {
-                                print += a + " ";
-                            }
-                        }
-                        print = StringUtils.stripToEmpty(print);
-                        System.out.println(num + ": " + print);
+                        int s = indexOfIgnoreCase(row, word);
+                        int e = lastIndexOfIgnoreCase(row, word) + word.length();
+                        row = StringUtils.overlay(row, word.toUpperCase(), s, e);
+                        System.out.println(num + ": " + row);
                     }
                     num++;
                 }

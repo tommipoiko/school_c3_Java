@@ -7,8 +7,6 @@ import java.util.Iterator;
 
 /**
  * A class for representing a JSON object.
- * <p>
- * @author tommipoiko
  */
 public final class ObjectNode extends Node implements Iterable<String> {
     

@@ -2,8 +2,6 @@ package fi.tuni.prog3.json;
 
 /**
  * An abstract super class for different types of JSON nodes.
- * <p>
- * @author tommipoiko
  */
 public abstract class Node {
     

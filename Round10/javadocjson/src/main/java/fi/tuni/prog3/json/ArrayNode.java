@@ -6,8 +6,6 @@ import java.util.NoSuchElementException;
 
 /**
  * A class for representing a JSON array.
- * <p>
- * @author tommipoiko
  */
 public final class ArrayNode extends Node implements Iterable<Node> {
 

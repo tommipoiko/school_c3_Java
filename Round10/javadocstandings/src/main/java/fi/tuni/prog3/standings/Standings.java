@@ -59,7 +59,9 @@ public class Standings {
     }
 
     /**
-     * A class for storing statistics of a single team.
+     * A class for storing statistics of a single team. The class offers only
+     * public getter functions. The enclosing class Standings is responsible for
+     * setting and updating team statistics.
      */
     public static class Team {
 
@@ -71,40 +73,72 @@ public class Standings {
         private int team_allowedgoals;
         private int team_points;
 
+        /**
+         * Constructs a Team object for storing statistics of the named team.
+         * @param name the name of the team whose statistics the new team object stores.
+         */
         public Team(String name) {
             this.team_name = name;
         }
         
+        /**
+         * Returns the name of the team.
+         * @return the name of the team.
+         */
         public String getName() {
 
             return this.team_name;
         }
         
+        /**
+         * Returns the number of wins of the team.
+         * @return the number of wins of the team.
+         */
         public int getWins() {
 
             return this.team_wins;
         }
         
+        /**
+         * Returns the number of ties of the team.
+         * @return the number of ties of the team.
+         */
         public int getTies() {
 
             return this.team_ties;
         }
         
+        /**
+         * Returns the number of losses of the team.
+         * @return the number of losses of the team.
+         */
         public int getLosses() {
 
             return this.team_losses;
         }
         
+        /**
+         * Returns the number of goals scored by the team.
+         * @return the number of goals scored by the team.
+         */
         public int getScored() {
 
             return this.team_scoredgoals;
         }
         
+        /**
+         * Returns the number of goals allowed (conceded) by the team.
+         * @return the number of goals allowed (conceded) by the team.
+         */
         public int getAllowed() {
 
             return this.team_allowedgoals;
         }
         
+        /**
+         * Returns the overall number of points of the team.
+         * @return the overall number of points of the team.
+         */
         public int getPoints() {
 
             return this.team_points;

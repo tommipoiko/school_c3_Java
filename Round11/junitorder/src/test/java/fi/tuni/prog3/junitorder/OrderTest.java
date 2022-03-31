@@ -2,6 +2,7 @@ package fi.tuni.prog3.junitorder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,10 +45,12 @@ public class OrderTest {
     public void testAddItems2() {
         System.out.println("addItems2");
         Order order = new Order();
-        Order.Item item = new Order.Item("Computer", 5.50);
-        boolean expResult = false;
-        boolean result = order.addItems(item, -1);
-        assertEquals(expResult, result, "This was wrong");
+        Order.Item item = new Order.Item("Computer", 5.50);        
+        IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                ()-> order.addItems(item, -1),
+                "This was wrong"
+        );
     }
     
     @Test
@@ -57,9 +60,11 @@ public class OrderTest {
         Order.Item item1 = new Order.Item("Computer", 5.50);
         order.addItems(item1, 1);
         Order.Item item2 = new Order.Item("Computer", 5.00);
-        boolean expResult = false;
-        boolean result = order.addItems(item2, 1);
-        assertEquals(expResult, result, "This was wrong");
+        IllegalStateException thrown = assertThrows(
+                IllegalStateException.class,
+                ()-> order.addItems(item2, 1),
+                "This was wrong"
+        );
     }
     
     @Test
@@ -77,9 +82,11 @@ public class OrderTest {
     public void testAddItems5() {
         System.out.println("addItems5");
         Order order = new Order();
-        boolean expResult = false;
-        boolean result = order.addItems("Computer", 2);
-        assertEquals(expResult, result, "This was wrong");
+        NoSuchElementException thrown = assertThrows(
+                NoSuchElementException.class,
+                ()-> order.addItems("Computer", 2),
+                "This was wrong"
+        );
     }
     
     @Test
@@ -88,9 +95,11 @@ public class OrderTest {
         Order order = new Order();
         Order.Item item = new Order.Item("Computer", 5.50);
         order.addItems(item, 3);
-        boolean expResult = false;
-        boolean result = order.addItems("Computer", -1);
-        assertEquals(expResult, result, "This was wrong");
+        IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                ()-> order.addItems("Computer", -1),
+                "This was wrong"
+        );
     }
     
     @Test
@@ -140,7 +149,7 @@ public class OrderTest {
         order.addItems(item1, 3);
         Order.Item item2 = new Order.Item("Dildo", 9.99);
         order.addItems(item2, 2);
-        double expResult = 36.48;
+        double expResult = 3*5.50 + 2*9.99;
         double result = order.getTotalPrice();
         assertEquals(expResult, result, "This was wrong");
     }
@@ -181,21 +190,25 @@ public class OrderTest {
         System.out.println("removeItems2");
         Order order = new Order();
         Order.Item item = new Order.Item("Computer", 5.50);
-        order.addItems(item, 3);
-        boolean expResult = false;
-        boolean result = order.removeItems("Computer", -1);
-        assertEquals(expResult, result, "This was wrong");
+        order.addItems(item, 3);        
+        IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                ()-> order.removeItems("Computer", -1),
+                "This was wrong"
+        );
     }
     
     @Test
     public void testRemoveItems3() {
         System.out.println("removeItems3");
         Order order = new Order();
-        Order.Item item = new Order.Item("Computer", 5.50);
+        Order.Item item = new Order.Item("Dildo", 5.50);
         order.addItems(item, 3);
-        boolean expResult = false;
-        boolean result = order.removeItems("Computer", 4);
-        assertEquals(expResult, result, "This was wrong");
+        NoSuchElementException thrown = assertThrows(
+                NoSuchElementException.class,
+                ()-> order.removeItems("Computer", 1),
+                "This was wrong"
+        );
     }
     
     @Test

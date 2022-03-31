@@ -67,7 +67,7 @@ public class OrderTest {
         System.out.println("addItems4");
         Order order = new Order();
         Order.Item item = new Order.Item("Computer", 5.50);
-        order.addItem(item, 3);
+        order.addItems(item, 3);
         boolean expResult = true;
         boolean result = order.addItems("Computer", 3);
         assertEquals(expResult, result, "This was wrong");
@@ -87,7 +87,7 @@ public class OrderTest {
         System.out.println("addItems6");
         Order order = new Order();
         Order.Item item = new Order.Item("Computer", 5.50);
-        order.addItem(item, 3);
+        order.addItems(item, 3);
         boolean expResult = false;
         boolean result = order.addItems("Computer", -1);
         assertEquals(expResult, result, "This was wrong");
@@ -98,7 +98,7 @@ public class OrderTest {
         System.out.println("getEntries");
         Order order = new Order();
         Order.Item item = new Order.Item("Computer", 5.50);
-        order.addItem(item, 3);
+        order.addItems(item, 3);
         Order.Entry entry = new Order.Entry(item, 3);
         List<Order.Entry> expResult = new ArrayList<>();
         expResult.add(entry);
@@ -111,9 +111,9 @@ public class OrderTest {
         System.out.println("getEntryCount");
         Order order = new Order();
         Order.Item item1 = new Order.Item("Computer", 5.50);
-        order.addItem(item1, 3);
+        order.addItems(item1, 3);
         Order.Item item2 = new Order.Item("Dildo", 9.99);
-        order.addItem(item2, 2);
+        order.addItems(item2, 2);
         int expResult = 2;
         int result = order.getEntryCount();
         assertEquals(expResult, result, "This was wrong");
@@ -124,9 +124,9 @@ public class OrderTest {
         System.out.println("getItemCount");
         Order order = new Order();
         Order.Item item1 = new Order.Item("Computer", 5.50);
-        order.addItem(item1, 3);
+        order.addItems(item1, 3);
         Order.Item item2 = new Order.Item("Dildo", 9.99);
-        order.addItem(item2, 2);
+        order.addItems(item2, 2);
         int expResult = 5;
         int result = order.getItemCount();
         assertEquals(expResult, result, "This was wrong");
@@ -137,9 +137,9 @@ public class OrderTest {
         System.out.println("getTotalPrice");
         Order order = new Order();
         Order.Item item1 = new Order.Item("Computer", 5.50);
-        order.addItem(item1, 3);
+        order.addItems(item1, 3);
         Order.Item item2 = new Order.Item("Dildo", 9.99);
-        order.addItem(item2, 2);
+        order.addItems(item2, 2);
         double expResult = 36.48;
         double result = order.getTotalPrice();
         assertEquals(expResult, result, "This was wrong");
@@ -159,7 +159,7 @@ public class OrderTest {
         System.out.println("isEmpty2");
         Order order = new Order();
         Order.Item item = new Order.Item("Computer", 5.50);
-        order.addItem(item, 3);
+        order.addItems(item, 3);
         boolean expResult = false;
         boolean result = order.isEmpty();
         assertEquals(expResult, result, "This was wrong");
@@ -170,7 +170,7 @@ public class OrderTest {
         System.out.println("removeItems1");
         Order order = new Order();
         Order.Item item = new Order.Item("Computer", 5.50);
-        order.addItem(item, 3);
+        order.addItems(item, 3);
         boolean expResult = true;
         boolean result = order.removeItems("Computer", 2);
         assertEquals(expResult, result, "This was wrong");
@@ -181,7 +181,7 @@ public class OrderTest {
         System.out.println("removeItems2");
         Order order = new Order();
         Order.Item item = new Order.Item("Computer", 5.50);
-        order.addItem(item, 3);
+        order.addItems(item, 3);
         boolean expResult = false;
         boolean result = order.removeItems("Computer", -1);
         assertEquals(expResult, result, "This was wrong");
@@ -192,7 +192,7 @@ public class OrderTest {
         System.out.println("removeItems3");
         Order order = new Order();
         Order.Item item = new Order.Item("Computer", 5.50);
-        order.addItem(item, 3);
+        order.addItems(item, 3);
         boolean expResult = false;
         boolean result = order.removeItems("Computer", 4);
         assertEquals(expResult, result, "This was wrong");

@@ -128,9 +128,11 @@ public class OrderTest {
         for (var i : expResultList) {
             expResult += i.toString();
         }
+        
         List<Order.Entry> resultList = new ArrayList<>();
         resultList.addAll(order.getEntries());
         String result = "";
+        
         for (var i : resultList) {
             result += i.toString();
         }
@@ -245,6 +247,18 @@ public class OrderTest {
                 ()-> order.removeItems("Computer", 1),
                 "This was wrong"
         );
+    }
+    
+    @Test
+    public void testRemoveItems5() {
+        System.out.println("removeItems5");
+        Order order = new Order();
+        Order.Item item = new Order.Item("Dildo", 5.50);
+        order.addItems(item, 3);
+        order.removeItems("Dildo", 3);
+        List<Order.Entry> result = order.getEntries();
+        int size = result.size();
+        assertEquals(0, size);
     }
     
     @Test

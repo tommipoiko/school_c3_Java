@@ -112,7 +112,7 @@ public class OrderTest {
         List<Order.Entry> expResult = new ArrayList<>();
         expResult.add(entry);
         List<Order.Entry> result = order.getEntries();
-        if (!expResult.equals(result)) {
+        if (!expResult.containsAll(result) && !result.containsAll(expResult)) {
             fail("This was wrong");
         }
     }

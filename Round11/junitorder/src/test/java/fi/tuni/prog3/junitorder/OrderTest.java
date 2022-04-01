@@ -112,7 +112,9 @@ public class OrderTest {
         List<Order.Entry> expResult = new ArrayList<>();
         expResult.add(entry);
         List<Order.Entry> result = order.getEntries();
-        assertEquals(expResult, result, "This was wrong");
+        if (!expResult.equals(result)) {
+            fail("This was wrong");
+        }
     }
     
     @Test

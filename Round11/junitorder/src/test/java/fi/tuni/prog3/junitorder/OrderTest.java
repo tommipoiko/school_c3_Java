@@ -106,15 +106,24 @@ public class OrderTest {
     public void testGetEntries() {
         System.out.println("getEntries");
         Order order = new Order();
+        
         Order.Item item1 = new Order.Item("Computer", 5.50);
         order.addItems(item1, 3);
         Order.Entry entry1 = new Order.Entry(item1, 3);
+        
         Order.Item item2 = new Order.Item("Dildo", 9.99);
         order.addItems(item2, 3);
         Order.Entry entry2 = new Order.Entry(item2, 3);
+        
+        Order.Item item3 = new Order.Item("Tuna", 1.25);
+        order.addItems(item3, 2);
+        Order.Entry entry3 = new Order.Entry(item3, 2);
+        
         List<Order.Entry> expResultList = new ArrayList<>();
         expResultList.add(entry1);
         expResultList.add(entry2);
+        expResultList.add(entry3);
+        
         String expResult = "";
         for (var i : expResultList) {
             expResult += i.toString();
@@ -125,6 +134,7 @@ public class OrderTest {
         for (var i : resultList) {
             result += i.toString();
         }
+        
         assertEquals(expResult, result, "This was wrong");
     }
     

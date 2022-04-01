@@ -14,22 +14,6 @@ public class OrderTest {
     
     public OrderTest() {
     }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
 
     @Test
     public void testAddItems1() {
@@ -103,8 +87,8 @@ public class OrderTest {
     }
     
     @Test
-    public void testGetEntries() {
-        System.out.println("getEntries");
+    public void testGetEntries1() {
+        System.out.println("getEntries1");
         Order order = new Order();
         
         Order.Item item1 = new Order.Item("Computer", 5.50);
@@ -119,7 +103,7 @@ public class OrderTest {
         order.addItems(item3, 2);
         Order.Entry entry3 = new Order.Entry(item3, 2);
         
-        List<Order.Entry> expResultList = new ArrayList<>();
+        List<Order.Entry> expResultList = new ArrayList<Order.Entry>();
         expResultList.add(entry1);
         expResultList.add(entry2);
         expResultList.add(entry3);
@@ -129,7 +113,7 @@ public class OrderTest {
             expResult += i.toString();
         }
         
-        List<Order.Entry> resultList = new ArrayList<>();
+        List<Order.Entry> resultList = new ArrayList<Order.Entry>();
         resultList.addAll(order.getEntries());
         String result = "";
         
@@ -138,6 +122,64 @@ public class OrderTest {
         }
         
         assertEquals(expResult, result, "This was wrong");
+    }
+    
+    @Test
+    public void testGetEntries2() {
+        System.out.println("getEntries2");
+        Order order = new Order();
+        
+        Order.Item item1 = new Order.Item("Computer", 5.50);
+        order.addItems(item1, 3);
+        Order.Entry entry1 = new Order.Entry(item1, 4);
+        
+        Order.Item item2 = new Order.Item("Dildo", 9.99);
+        order.addItems(item2, 3);
+        Order.Entry entry2 = new Order.Entry(item2, 3);
+        
+        Order.Item item3 = new Order.Item("Tuna", 1.25);
+        order.addItems(item3, 2);
+        Order.Entry entry3 = new Order.Entry(item3, 2);
+        
+        order.addItems(item1, 1);
+        
+        List<Order.Entry> expResultList = new ArrayList<Order.Entry>();
+        expResultList.add(entry1);
+        expResultList.add(entry2);
+        expResultList.add(entry3);
+        
+        String expResult = "";
+        for (var i : expResultList) {
+            expResult += i.toString();
+        }
+        
+        List<Order.Entry> resultList = new ArrayList<Order.Entry>();
+        resultList.addAll(order.getEntries());
+        String result = "";
+        
+        for (var i : resultList) {
+            result += i.toString();
+        }
+        
+        assertEquals(expResult, result, "This was wrong");
+    }
+    
+    @Test
+    public void testGetEntries3() {
+        System.out.println("getEntries3");
+        var order = new Order();
+        Order.Item item1 = new Order.Item("tuote", 3);
+        Order.Item item2 = new Order.Item("tuote2", 2);
+        order.addItems(item1, 2);
+        order.addItems(item2, 3);
+        
+        List<Order.Entry> expected = new ArrayList<Order.Entry>();
+        expected.add(new Order.Entry(item1, 2));
+        expected.add(new Order.Entry(item2, 3));
+        
+        order.getEntries().remove(0);
+        
+        assertEquals(expected.size(), order.getEntries().size());
     }
     
     @Test

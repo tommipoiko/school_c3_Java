@@ -265,9 +265,11 @@ public class OrderTest {
         System.out.println("entryGetItem");
         Order.Item item = new Order.Item("Computer", 5.50);
         Order.Entry entry = new Order.Entry(item, 3);
-        Order.Item expResult = new Order.Item("Computer", 5.50);
         Order.Item result = entry.getItem();
-        assertEquals(expResult, result, "This was wrong");
+        if (result.getName() != "Computer" &&
+                result.getPrice() != 5.50) {
+            fail("This was wrong");
+        }
     }
     
     @Test

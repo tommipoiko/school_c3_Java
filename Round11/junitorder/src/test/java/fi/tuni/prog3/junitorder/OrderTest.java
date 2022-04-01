@@ -106,15 +106,26 @@ public class OrderTest {
     public void testGetEntries() {
         System.out.println("getEntries");
         Order order = new Order();
-        Order.Item item = new Order.Item("Computer", 5.50);
-        order.addItems(item, 3);
-        Order.Entry entry = new Order.Entry(item, 3);
-        List<Order.Entry> expResult = new ArrayList<>();
-        expResult.add(entry);
-        List<Order.Entry> result = order.getEntries();
-        if (!expResult.containsAll(result) && !result.containsAll(expResult)) {
-            fail("This was wrong");
+        Order.Item item1 = new Order.Item("Computer", 5.50);
+        order.addItems(item1, 3);
+        Order.Entry entry1 = new Order.Entry(item1, 3);
+        Order.Item item2 = new Order.Item("Dildo", 9.99);
+        order.addItems(item2, 3);
+        Order.Entry entry2 = new Order.Entry(item2, 3);
+        List<Order.Entry> expResultList = new ArrayList<>();
+        expResultList.add(entry1);
+        expResultList.add(entry2);
+        String expResult = "";
+        for (var i : expResultList) {
+            expResult += i.toString();
         }
+        List<Order.Entry> resultList = new ArrayList<>();
+        resultList.addAll(order.getEntries());
+        String result = "";
+        for (var i : resultList) {
+            result += i.toString();
+        }
+        assertEquals(expResult, result, "This was wrong");
     }
     
     @Test

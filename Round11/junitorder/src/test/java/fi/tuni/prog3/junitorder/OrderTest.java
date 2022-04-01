@@ -215,11 +215,54 @@ public class OrderTest {
     public void testRemoveItems3() {
         System.out.println("removeItems3");
         Order order = new Order();
+        Order.Item item = new Order.Item("Computer", 5.50);
+        order.addItems(item, 3);        
+        IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                ()-> order.removeItems("Computer", 4),
+                "This was wrong"
+        );
+    }
+    
+    @Test
+    public void testRemoveItems4() {
+        System.out.println("removeItems4");
+        Order order = new Order();
         Order.Item item = new Order.Item("Dildo", 5.50);
         order.addItems(item, 3);
         NoSuchElementException thrown = assertThrows(
                 NoSuchElementException.class,
                 ()-> order.removeItems("Computer", 1),
+                "This was wrong"
+        );
+    }
+    
+    @Test
+    public void testItemConstructor1() {
+        System.out.println("itemConstructor1");
+        IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                ()-> new Order.Item("Computer", -1.69),
+                "This was wrong"
+        );
+    }
+    
+    @Test
+    public void testItemConstructor2() {
+        System.out.println("itemConstructor2");
+        IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                ()-> new Order.Item(null, 5.55),
+                "This was wrong"
+        );
+    }
+    
+    @Test
+    public void testItemConstructor3() {
+        System.out.println("itemConstructor3");
+        IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                ()-> new Order.Item(null, -1.69),
                 "This was wrong"
         );
     }
@@ -269,6 +312,17 @@ public class OrderTest {
         int expResult = 3;
         int result = entry.getCount();
         assertEquals(expResult, result, "This was wrong");
+    }
+    
+    @Test
+    public void testEntryConstructor() {
+        System.out.println("itemEntryConstructor");
+        Order.Item item = new Order.Item("Computer", 5.50);
+        IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                ()-> new Order.Entry(item, -1),
+                "This was wrong"
+        );
     }
     
     @Test

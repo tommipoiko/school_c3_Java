@@ -49,9 +49,9 @@ public class Calculator extends Application {
         Button btn = new Button("Add");
         btn.setId("btnAdd");
         btn.setOnAction((event) -> {
-            resultTxt.setText(Integer.toString(
-                    Integer.valueOf(firstTxt.getText())
-                            + Integer.valueOf(secondTxt.getText())));
+            resultTxt.setText(Double.toString(
+                    Double.valueOf(firstTxt.getText())
+                            + Double.valueOf(secondTxt.getText())));
         });
         return btn;
     }
@@ -60,9 +60,9 @@ public class Calculator extends Application {
         Button btn = new Button("Subtract");
         btn.setId("btnSub");
         btn.setOnAction((event) -> {
-            resultTxt.setText(Integer.toString(
-                    Integer.valueOf(firstTxt.getText())
-                            - Integer.valueOf(secondTxt.getText())));
+            resultTxt.setText(Double.toString(
+                    Double.valueOf(firstTxt.getText())
+                            - Double.valueOf(secondTxt.getText())));
         });
         return btn;
     }
@@ -71,9 +71,9 @@ public class Calculator extends Application {
         Button btn = new Button("Multiply");
         btn.setId("btnMul");
         btn.setOnAction((event) -> {
-            resultTxt.setText(Integer.toString(
-                    Integer.valueOf(firstTxt.getText())
-                            * Integer.valueOf(secondTxt.getText())));
+            resultTxt.setText(Double.toString(
+                    Double.valueOf(firstTxt.getText())
+                            * Double.valueOf(secondTxt.getText())));
         });
         return btn;
     }
@@ -82,9 +82,9 @@ public class Calculator extends Application {
         Button btn = new Button("Divide");
         btn.setId("btnDiv");
         btn.setOnAction((event) -> {
-            resultTxt.setText(Integer.toString(
-                    Integer.valueOf(firstTxt.getText())
-                            / Integer.valueOf(secondTxt.getText())));
+            resultTxt.setText(Double.toString(
+                    Double.valueOf(firstTxt.getText())
+                            / Double.valueOf(secondTxt.getText())));
         });
         return btn;
     }
